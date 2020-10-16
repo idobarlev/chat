@@ -1,24 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useRef, useState } from 'react';
 import './App.css';
 
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
+import FirebaseConfig from './firebaseConfig'
+
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+
+import SignIn from './Components/SignIn'
+import SignOut from './Components/SignOut'
+import Chat from './Components/Chat'
+
+const auth = firebase.auth();
+const firestore = firebase.firestore();
+
 function App() {
+  const [user] = useAuthState(auth)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <nav>
+          <h1>Chatime 💬</h1>
+          {user && <SignOut />}
+        </nav>
       </header>
+
+        {user ? <Chat /> : <SignIn />}
     </div>
   );
 }
