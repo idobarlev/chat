@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
-//import FirebaseConfig from '../firebaseConfig'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import ChatMessage from './ChatMessage'
 
@@ -40,12 +39,12 @@ function Chat() {
 
     return (
         <div>
-            <div>
+            <div style={{marginRight : '10%', marginLeft : '10%'}}>
                 {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
             </div>
             <span ref={dummy}></span>
-            <form className="form-text" onSubmit={handleSubmit}>
-                <input type="text" value={formMessage} onChange={handleChange}/>
+            <form onSubmit={handleSubmit}>
+                <input className="form-text" type="text" value={formMessage} onChange={handleChange}/>
                 <button>📨</button>
             </form>
         </div>

@@ -21,14 +21,13 @@ function App() {
 
   return (
     <div className="App">
-      <header>
-        <nav>
-          <h1>Chatime 💬</h1>
-          {user && <SignOut />}
-        </nav>
+      <header className="sticky header">
+        <h1 style={{float : "left", display : "inline"}}>Chatime 💬</h1>
+        <h1 style={{float : "right"}} >{user ? <SignOut /> : <SignIn />}</h1>
       </header>
-
-        {user ? <Chat /> : <SignIn />}
+        <div style={{marginTop : "85px"}}>
+          {user ? <Chat /> : <h2 style={{marginTop : "20%"}}>Welcome to Chatime 💬 <br/> sign in to continue! 🔥</h2>}
+        </div>
     </div>
   );
 }
